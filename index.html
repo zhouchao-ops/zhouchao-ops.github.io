@@ -1,10 +1,268 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <title>我的 GitHub Pages</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Chao Zhou — Ph.D. student at USTC researching multimodal generation, efficient DiTs, instruction following, and generative model copyright protection.">
+  <title>Chao Zhou | Multimodal Generation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    :root {
+      --accent: #0a65a8;
+      --accent-soft: #eaf4fb;
+      --ink: #17212b;
+      --body: #34404c;
+      --muted: #6c7782;
+      --line: #e5e9ed;
+      --paper: #fff;
+      --surface: #f7f9fb;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--body);
+      background: var(--paper);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 58px;
+      width: min(1180px, calc(100% - 64px));
+      margin: 58px auto 72px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 48px;
+      align-self: start;
+      text-align: center;
+    }
+    .portrait {
+      width: 194px;
+      height: 194px;
+      object-fit: cover;
+      object-position: center 20%;
+      border-radius: 50%;
+      box-shadow: 0 12px 34px rgba(25, 49, 72, .13);
+    }
+    .name { margin: 20px 0 2px; color: var(--ink); font-size: 27px; line-height: 1.25; }
+    .native-name { margin: 0 0 7px; color: var(--muted); font-size: 14px; font-weight: 500; }
+    .role { margin: 0; color: var(--muted); font-size: 14px; }
+    .affiliation { margin: 5px 0 0; color: var(--accent); font-size: 14px; font-weight: 600; }
+    .location { margin: 14px 0 0; color: #8a949e; font-size: 13px; }
+    .location i { margin-right: 5px; }
+    .socials { display: flex; justify-content: center; gap: 17px; margin-top: 20px; }
+    .socials a {
+      display: grid;
+      place-items: center;
+      width: 35px;
+      height: 35px;
+      color: #606d79;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      transition: .18s ease;
+    }
+    .socials a:hover { color: #fff; background: var(--accent); border-color: var(--accent); text-decoration: none; transform: translateY(-2px); }
+    .research-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px; margin-top: 27px; padding-top: 23px; border-top: 1px solid var(--line); }
+    .research-tags span { padding: 4px 9px; color: #53616e; background: var(--surface); border-radius: 999px; font-size: 11px; }
+
+    .content { min-width: 0; }
+    .section-title {
+      margin: 42px 0 20px;
+      padding-bottom: 9px;
+      color: var(--ink);
+      border-bottom: 1px solid var(--line);
+      font-size: 22px;
+      font-weight: 650;
+      letter-spacing: -.01em;
+    }
+    .section-title:first-child { margin-top: 0; }
+    .about p { margin: 0 0 14px; font-size: 15.5px; }
+    .highlight { color: var(--ink); font-weight: 600; }
+
+    .news { display: grid; gap: 10px; }
+    .news-item { display: grid; grid-template-columns: 92px 1fr; gap: 17px; font-size: 15px; }
+    .news-date { color: var(--accent); font-weight: 650; font-variant-numeric: tabular-nums; }
+    .new-pill { margin-right: 7px; padding: 2px 7px; color: var(--accent); background: var(--accent-soft); border-radius: 999px; font-size: 11px; font-weight: 700; vertical-align: 1px; }
+
+    .experience { display: grid; gap: 23px; }
+    .exp-item { display: grid; grid-template-columns: 118px 1fr auto; gap: 20px; align-items: center; }
+    .exp-logo { width: 112px; height: 43px; object-fit: contain; object-position: left center; }
+    .exp-role { color: var(--ink); font-size: 15.5px; font-weight: 650; }
+    .exp-org, .exp-time { color: var(--muted); font-size: 14px; }
+    .exp-time { white-space: nowrap; text-align: right; }
+
+    .publications { display: grid; gap: 34px; }
+    .publication { display: grid; grid-template-columns: 245px minmax(0, 1fr); gap: 25px; align-items: start; }
+    .teaser {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top center;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 5px 16px rgba(26, 48, 69, .07);
+    }
+    .pub-title { margin: 0 0 7px; color: var(--ink); font-size: 16.5px; font-weight: 650; line-height: 1.42; }
+    .authors { margin-bottom: 5px; color: #4d5863; font-size: 14.5px; }
+    .authors strong { color: var(--ink); }
+    .venue { margin-bottom: 12px; color: var(--muted); font-size: 14px; font-style: italic; }
+    .summary { margin: 0 0 13px; color: #596571; font-size: 13.5px; line-height: 1.55; }
+    .pub-links { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pub-links a {
+      padding: 5px 12px;
+      color: #4e5b67;
+      background: #f1f4f6;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 600;
+      transition: .18s ease;
+    }
+    .pub-links a:hover { color: #fff; background: var(--accent); text-decoration: none; }
+    .pub-links i { margin-right: 5px; }
+
+    footer { margin-top: 54px; padding-top: 19px; color: #929aa2; border-top: 1px solid var(--line); text-align: center; font-size: 12.5px; }
+
+    @media (max-width: 800px) {
+      .page { grid-template-columns: 1fr; width: min(100% - 38px, 680px); margin: 34px auto 50px; gap: 30px; }
+      .sidebar { position: static; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+      .portrait { width: 165px; height: 165px; }
+      .research-tags { max-width: 430px; margin-left: auto; margin-right: auto; }
+      .publication { grid-template-columns: 1fr; gap: 15px; }
+      .teaser { max-width: 390px; }
+      .exp-item { grid-template-columns: 95px 1fr; gap: 15px; }
+      .exp-logo { width: 90px; }
+      .exp-time { grid-column: 2; text-align: left; margin-top: -12px; }
+    }
+
+    @media (max-width: 480px) {
+      .news-item { grid-template-columns: 1fr; gap: 1px; margin-bottom: 9px; }
+      .section-title { font-size: 20px; }
+      .about p { font-size: 15px; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, <您的用户名>.github.io 成功了！</h1>
-  <p>这是我的第一个免费网站。</p>
+  <div class="page">
+    <aside class="sidebar">
+      <img class="portrait" src="assets/profile/chao-zhou.jpg" alt="Portrait of Chao Zhou">
+      <h1 class="name">Chao Zhou</h1>
+      <p class="native-name">周潮</p>
+      <p class="role">Ph.D. Student</p>
+      <p class="affiliation">University of Science and Technology of China</p>
+      <p class="location"><i class="fa-solid fa-location-dot"></i>Hefei, China</p>
+      <div class="socials" aria-label="Contact links">
+        <a href="mailto:chaozhou@mail.ustc.edu.cn" aria-label="Email" title="Email"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://github.com/zhouchao-ops" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://arxiv.org/search/?query=Chao+Zhou&searchtype=author" target="_blank" rel="noreferrer" aria-label="arXiv" title="arXiv"><i class="fa-solid fa-file-lines"></i></a>
+      </div>
+      <div class="research-tags" aria-label="Research interests">
+        <span>Multimodal Generation</span>
+        <span>Diffusion Transformers</span>
+        <span>Instruction Following</span>
+        <span>Reinforcement Learning</span>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="about">
+        <h2 class="section-title">About Me</h2>
+        <p>I am a Ph.D. student in Cybersecurity at the <span class="highlight">University of Science and Technology of China (USTC)</span>, advised by Prof. Nenghai Yu. I received my B.Eng. degree from USTC in 2023.</p>
+        <p>My research focuses on <span class="highlight">multimodal generation</span>, with an emphasis on controllable and efficient image/video generation, instruction following, and reinforcement learning for generative models. I am interested in making foundation models more capable, resource-efficient, and trustworthy.</p>
+        <p>Previously, I was a Research Intern at <span class="highlight">Microsoft Research Asia</span>, where I worked on copyright protection and authorization for text-to-image models. I welcome discussions and collaborations in generative AI.</p>
+      </section>
+
+      <section>
+        <h2 class="section-title">News</h2>
+        <div class="news">
+          <div class="news-item"><div class="news-date">Feb 2026</div><div><span class="new-pill">NEW</span>Our work on efficient multi-condition DiTs is available on arXiv.</div></div>
+          <div class="news-item"><div class="news-date">2025</div><div><strong>Scale Your Instructions</strong> was accepted to ICCV 2025.</div></div>
+          <div class="news-item"><div class="news-date">2025</div><div>Our work on plug-in authorization for text-to-image models was published in TMLR.</div></div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">Experience</h2>
+        <div class="experience">
+          <div class="exp-item">
+            <img class="exp-logo" src="assets/logos/ustc.jpg" alt="USTC logo">
+            <div><div class="exp-role">Ph.D. Student · Cybersecurity</div><div class="exp-org">University of Science and Technology of China</div></div>
+            <div class="exp-time">2023 – Present</div>
+          </div>
+          <div class="exp-item">
+            <img class="exp-logo" src="assets/logos/microsoft.svg" alt="Microsoft logo">
+            <div><div class="exp-role">Research Intern</div><div class="exp-org">Microsoft Research Asia, Beijing</div></div>
+            <div class="exp-time">2022 – 2023</div>
+          </div>
+          <div class="exp-item">
+            <img class="exp-logo" src="assets/logos/ustc.jpg" alt="USTC logo">
+            <div><div class="exp-role">B.Eng. · Cybersecurity</div><div class="exp-org">University of Science and Technology of China</div></div>
+            <div class="exp-time">2019 – 2023</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">Selected Publications</h2>
+        <div class="publications">
+          <article class="publication">
+            <img class="teaser" src="assets/teasers/pka.jpg" alt="First page of the PKA paper">
+            <div>
+              <h3 class="pub-title">Rethinking Multi-Condition DiTs: Eliminating Redundant Attention via Position-Alignment and Keyword-Scoping</h3>
+              <div class="authors"><strong>Chao Zhou</strong>, Tianyi Wei, Yiling Chen, Wenbo Zhou, Nenghai Yu</div>
+              <div class="venue">arXiv, 2026</div>
+              <p class="summary">Position-aligned and Keyword-scoped Attention removes redundant spatial and semantic interactions, achieving 10.0× inference speedup and 5.1× VRAM saving in the reported experiments.</p>
+              <div class="pub-links">
+                <a href="https://arxiv.org/abs/2602.06850" target="_blank" rel="noreferrer"><i class="fa-solid fa-file-pdf"></i>Paper</a>
+                <a href="papers/pka.pdf"><i class="fa-solid fa-download"></i>PDF</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="publication">
+            <img class="teaser" src="assets/teasers/saas.jpg" alt="First page of the SaaS paper">
+            <div>
+              <h3 class="pub-title">Scale Your Instructions: Enhance the Instruction-Following Fidelity of Unified Image Generation Model by Self-Adaptive Attention Scaling</h3>
+              <div class="authors"><strong>Chao Zhou</strong>, Tianyi Wei, Nenghai Yu</div>
+              <div class="venue">IEEE/CVF International Conference on Computer Vision (ICCV), 2025</div>
+              <p class="summary">SaaS dynamically identifies and strengthens neglected sub-instructions, improving complex instruction following without additional training or test-time optimization.</p>
+              <div class="pub-links">
+                <a href="https://openaccess.thecvf.com/content/ICCV2025/html/Zhou_Scale_Your_Instructions_Enhance_the_Instruction-Following_Fidelity_of_Unified_Image_ICCV_2025_paper.html" target="_blank" rel="noreferrer"><i class="fa-solid fa-file-pdf"></i>Paper</a>
+                <a href="https://github.com/zhouchao-ops/SaaS" target="_blank" rel="noreferrer"><i class="fa-brands fa-github"></i>Code</a>
+                <a href="papers/saas.pdf"><i class="fa-solid fa-download"></i>PDF</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="publication">
+            <img class="teaser" src="assets/teasers/copyright.svg" alt="Copyright authorization paper card">
+            <div>
+              <h3 class="pub-title">©Plug-in Authorization for Human Content Copyright Protection in Text-to-Image Model</h3>
+              <div class="authors"><strong>Chao Zhou</strong>, Huishuai Zhang, Jiang Bian, Weiming Zhang, Nenghai Yu</div>
+              <div class="venue">Transactions on Machine Learning Research (TMLR), 2025</div>
+              <p class="summary">A plug-in authorization framework for protecting human-created content and improving control and traceability in text-to-image model usage.</p>
+              <div class="pub-links">
+                <a href="https://openreview.net/forum?id=Ovvo8CHES4" target="_blank" rel="noreferrer"><i class="fa-solid fa-file-pdf"></i>Paper</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <footer>Last updated: September 2026 · Built for GitHub Pages</footer>
+    </main>
+  </div>
 </body>
 </html>

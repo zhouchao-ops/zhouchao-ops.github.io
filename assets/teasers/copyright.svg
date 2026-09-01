@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">Copyright Plug-in Authorization</title>
+  <desc id="desc">A conceptual card representing protected image generation.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef7fc"/>
+      <stop offset="1" stop-color="#dcecf8"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a65a8"/>
+      <stop offset="1" stop-color="#3c91c8"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="24" fill="url(#bg)"/>
+  <circle cx="400" cy="205" r="112" fill="#fff" opacity=".92"/>
+  <path d="M400 109l76 28v63c0 61-33 105-76 126-43-21-76-65-76-126v-63z" fill="url(#accent)"/>
+  <rect x="370" y="190" width="60" height="62" rx="8" fill="#fff"/>
+  <path d="M382 190v-17a18 18 0 0136 0v17" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="400" cy="217" r="8" fill="#0a65a8"/>
+  <path d="M400 224v14" stroke="#0a65a8" stroke-width="7" stroke-linecap="round"/>
+  <text x="400" y="385" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="30" font-weight="700" fill="#17324a">©Plug-in Authorization</text>
+  <text x="400" y="424" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20" fill="#557086">Copyright protection for text-to-image models</text>
+</svg>

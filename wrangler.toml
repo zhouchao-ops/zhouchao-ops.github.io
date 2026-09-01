@@ -1,3 +1,0 @@
-name = "jolly-sunset-dcld" # 这是您的Worker名称
-main = "gemini.js"         # **重点：指向您的代码文件**
-compatibility_date = "2025-11-25" # 兼容性日期
